@@ -22,6 +22,33 @@ import ipcalc
 #   Class A - 10.X.X.X/8? 
 #   Class B - 172.16.X.X/12?
 #   Class C - 192.168.X.X/16?
+classA="10.0.0.0/8"
+classB="172.16.0.0/12"
+classC="192.168.0.0/24"
+
+items = {'a', 'b', 'c'}
+
+classNetwork=classA
+
+validClass = False
+
+while validClass != True:
+	print "Select which Class Nework Addressing:"
+	print "a)\tClass A " + classA
+	print "b)\tClass B " + classB
+	print "b)\tClass C " + classC
+	class_choice = input(":\t")
+	print class_choice
+		
+	if class_choice in items:
+		classNetwork=items[class_choice]
+		validClass = True
+		break
+	else:
+		print("please select a valid option")
+
+
+
 #
 # Number of Sites/Locations?
 #   Custom VLAN Creation Setup? (Yes/No)
