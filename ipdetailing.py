@@ -3,14 +3,14 @@
 #	Project: Subnet Network IP Detailing												#
 #	Description: Simple tool to begin IPv4 Address detailing for your entire network.	#
 #																						#
-#	Author:																				#
+#	Author:	Carl Javier																	#
 #	Date:																				#
 #	Version:																			#
 #																						#
 #########################################################################################
 
 
-import ipcalc
+import ipcalc, sys
 
 
 ##########################
@@ -22,32 +22,76 @@ import ipcalc
 #   Class A - 10.X.X.X/8? 
 #   Class B - 172.16.X.X/12?
 #   Class C - 192.168.X.X/16?
-classA="10.0.0.0/8"
-classB="172.16.0.0/12"
-classC="192.168.0.0/24"
+classA="10.X.X.X/8"
+classB="172.16.X.X/12"
+classC="192.168.X.X/24"
 
-items = {'a', 'b', 'c'}
+items = {'0', '1', '2'}
 
-classNetwork=classA
+classNetwork= classA,classB,classC
+class_choice='4'
 
 validClass = False
 
 while validClass != True:
 	print "Select which Class Nework Addressing:"
-	print "a)\tClass A " + classA
-	print "b)\tClass B " + classB
-	print "b)\tClass C " + classC
-	class_choice = input(":\t")
-	print class_choice
+	print "0)\tClass A " + classA
+	print "1)\tClass B " + classB
+	print "2)\tClass C " + classC
+	class_choice = int(raw_input(":\t"))
+	
 		
-	if class_choice in items:
-		classNetwork=items[class_choice]
-		validClass = True
-		break
-	else:
-		print("please select a valid option")
+	if class_choice < 3:
+            print "You chose " + classNetwork[class_choice]
+            validClass = True
+        else:
+            print("please select a valid option\n\n\n")
 
 
+print "Please choose the X values for your Base Class Network: " + classNetwork[class_choice]
+network=[10,0,0,0] #Set a default of none was chosen
+
+
+print "Select which Class Nework Addressing:"
+print "0)\tChoose to replace X in Class Network: " + classNetwork[class_choice]
+print "1)\tChoose to keep the default Class Network: " + classNetwork[class_choice]
+
+if class_choice == 0:
+    print "You chose Base Class Network: "  + classNetwork[class_choice] + " \n\nPlease choose X.X.X"
+    network= [10,0,0,0]
+    count = 0
+    for x in network:
+        if network[count] == 0:
+            network[count] = int(raw_input("Choose first X:\t"))
+            ####NEED TO WRITE A Function to Check for Valid 0 - 255 values
+        count += 1
+    print "Network is " + str(network)
+
+if class_choice == 2:
+    print "You chose Base Class Network: "  + classNetwork[class_choice] + " \n\nPlease choose X.X"
+    network= [172,16,0,0]
+    count = 0
+    for x in network:
+        if network[count] == 0:
+            network[count] = int(raw_input("Choose first X:\t"))
+            ####NEED TO WRITE A Function to Check for Valid 0 - 255 values
+        count += 1
+    print "Network is " + str(network)
+
+
+if class_choice == 3:
+    print "You chose Base Class Network: "  + classNetwork[class_choice] + " \n\nPlease choose X.X"
+    network= [192,168,0,0]
+    count = 0
+    for x in network:
+        if network[count] == 0:
+            network[count] = int(raw_input("Choose first X:\t"))
+            ####NEED TO WRITE A Function to Check for Valid 0 - 255 values
+        count += 1
+    print "Network is " + str(network)
+    
+
+print "\n\n\n\n\nNetwork Number Chosen is: " + str(network[0])+ "." + str(network[1]) + "." + str(network[2])+ "." + str(network[3])
 
 #
 # Number of Sites/Locations?
